@@ -14,3 +14,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "PopularMovies_2022"
 include ':app'
+include ':data'
+include ':domain'
