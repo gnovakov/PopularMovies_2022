@@ -8,10 +8,12 @@ import com.gnova.domain.repositories.MovieRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.gnova.popularmovies_2022.ui.detail.DetailViewState.*
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@HiltViewModel
 class DetailViewModel @Inject constructor(private val movieRepository: MovieRepository) : ViewModel() {
 
     fun onViewInit(movie: Movie) {

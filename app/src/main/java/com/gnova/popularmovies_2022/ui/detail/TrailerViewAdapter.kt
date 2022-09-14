@@ -3,12 +3,15 @@ package com.gnova.popularmovies_2022.ui.detail
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gnova.domain.models.Trailer
 import com.gnova.popularmovies_2022.Const.YOUTUBE_THUMBNAIL_END_URL
 import com.gnova.popularmovies_2022.Const.YOUTUBE_THUMBNAIL_START_URL
+import com.gnova.popularmovies_2022.R
+import com.gnova.popularmovies_2022.databinding.TrailerGridViewItemBinding
 import com.squareup.picasso.Picasso
 
 class TrailerViewAdapter(private val onClickListener: OnClickListener) : ListAdapter<Trailer, TrailerViewAdapter.TrailerHolder>(DiffCallback) {

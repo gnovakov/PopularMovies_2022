@@ -9,7 +9,6 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.gnova.domain.models.Movie
-import com.gnova.popularmovies_2022.App
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.databinding.FragmentHomeBinding
 import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
@@ -41,8 +40,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         observeviewState()
         observeClick()
-
-
     }
 
     private fun observeviewState() {
@@ -78,14 +75,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         })
     }
 
-
     private fun showMovies(movies: List<Movie>) {
 
         adapter.submitList(removeBrokenMovies(movies))
     }
-
-
-
 
     private fun setupRecyclerView() {
         Log.d("TAG", "setupRecyclerView")
@@ -93,8 +86,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         binding.movieRecyclerView.layoutManager = GridLayoutManager(this.context, 2)
         binding.movieRecyclerView.adapter = adapter
     }
-
-
 
     override fun onDestroyView() {
         _binding = null

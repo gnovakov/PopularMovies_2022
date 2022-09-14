@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.Const.BASE_IMAGE_LARGE
 import com.gnova.popularmovies_2022.R
+import com.gnova.popularmovies_2022.databinding.MovieGridViewItemBinding
 import com.squareup.picasso.Picasso
 
 class MovieAdapter(private val onClickListener: OnClickListener) : ListAdapter<Movie, MovieAdapter.MovieViewHolder>(DiffCallback) {
