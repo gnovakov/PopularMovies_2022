@@ -1,6 +1,6 @@
 plugins {
     id 'java-library'
-    id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.jvm' // same as id 'kotlin'
 }
 
 java {
@@ -9,5 +9,11 @@ java {
 }
 
 dependencies {
+
+    // Rx
+    implementation "io.reactivex.rxjava2:rxandroid:$version_rxandroid"
+    implementation "io.reactivex.rxjava2:rxkotlin:$version_rxkotlin"
+
+    implementation "javax.inject:javax.inject:1"
 
 }
