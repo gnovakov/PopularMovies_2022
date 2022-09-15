@@ -72,8 +72,9 @@ dependencies {
 
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
-    implementation "com.squareup.retrofit2:adapter-rxjava2:$version_retrofit"
     implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+    // Retrofit Rx
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$version_retrofit"
 
     // okHttp
     implementation "com.squareup.okhttp3:logging-interceptor:$version_okhttp"
