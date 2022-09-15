@@ -1,7 +1,7 @@
 package com.gnova.data.mappers
 
 import com.gnova.data.models.MovieDTO
-import com.gnova.domain.common.DomainMapper
+import com.gnova.domain.mappers.DomainMapper
 import com.gnova.domain.models.Movie
 import javax.inject.Inject
 

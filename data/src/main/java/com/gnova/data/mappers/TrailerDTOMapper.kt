@@ -1,7 +1,7 @@
 package com.gnova.data.mappers
 
 import com.gnova.data.models.TrailerDTO
-import com.gnova.domain.common.DomainMapper
+import com.gnova.domain.mappers.DomainMapper
 import com.gnova.domain.models.Trailer
 import javax.inject.Inject
 

@@ -1,4 +1,4 @@
-package com.gnova.domain.common
+package com.gnova.domain.mappers
 
 interface DomainMapper <E, D> {
 

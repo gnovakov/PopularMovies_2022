@@ -5,7 +5,7 @@ import com.gnova.data.mappers.TrailerDTOMapper
 import com.gnova.data.models.MovieDTO
 import com.gnova.data.models.TrailerDTO
 import com.gnova.data.repositories.MovieRepositoryImpl
-import com.gnova.domain.common.DomainMapper
+import com.gnova.domain.mappers.DomainMapper
 import com.gnova.domain.models.Movie
 import com.gnova.domain.models.Trailer
 import com.gnova.domain.repositories.MovieRepository
