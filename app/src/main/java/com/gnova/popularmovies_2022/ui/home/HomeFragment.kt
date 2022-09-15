@@ -30,7 +30,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //(requireActivity().application as App).appComponent.inject(this)
         val binding = FragmentHomeBinding.bind(view)
         _binding = binding
 
@@ -38,11 +37,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         viewModel.onViewLoaded()
 
-        observeviewState()
+        observeViewState()
         observeClick()
     }
 
-    private fun observeviewState() {
+    private fun observeViewState() {
         viewModel.viewState.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Loading -> {

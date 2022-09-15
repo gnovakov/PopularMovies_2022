@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gnova.domain.models.Trailer
-import com.gnova.popularmovies_2022.Const.YOUTUBE_THUMBNAIL_END_URL
-import com.gnova.popularmovies_2022.Const.YOUTUBE_THUMBNAIL_START_URL
+import com.gnova.popularmovies_2022.util.Const.YOUTUBE_THUMBNAIL_END_URL
+import com.gnova.popularmovies_2022.util.Const.YOUTUBE_THUMBNAIL_START_URL
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.databinding.TrailerGridViewItemBinding
 import com.squareup.picasso.Picasso

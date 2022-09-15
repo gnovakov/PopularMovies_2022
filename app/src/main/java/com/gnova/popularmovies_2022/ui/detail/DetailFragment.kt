@@ -13,8 +13,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gnova.domain.models.Movie
 import com.gnova.domain.models.Trailer
-import com.gnova.popularmovies_2022.Const.BASE_IMAGE_LARGE
-import com.gnova.popularmovies_2022.Const.YOUTUBE_TRAILER_BASE_URL
+import com.gnova.popularmovies_2022.util.Const.BASE_IMAGE_LARGE
+import com.gnova.popularmovies_2022.util.Const.YOUTUBE_TRAILER_BASE_URL
 import com.gnova.popularmovies_2022.ui.detail.DetailViewState.*
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.databinding.FragmentDetailBinding
@@ -37,7 +37,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //(requireActivity().application as App).appComponent.inject(this)
         val binding = FragmentDetailBinding.bind(view)
         _binding = binding
 
@@ -49,11 +48,11 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         setupRecyclerView()
 
-        observeviewState()
+        observeViewState()
 
     }
 
-    private fun observeviewState() {
+    private fun observeViewState() {
 
         viewModel.viewState.observe(viewLifecycleOwner, Observer {
             when (it) {
