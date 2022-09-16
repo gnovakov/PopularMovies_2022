@@ -1,17 +1,16 @@
 package com.gnova.popularmovies_2022.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
 import com.gnova.domain.repositories.MovieRepository
+import com.gnova.popularmovies_2022.R
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
-import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -37,17 +36,15 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
 
     private fun getTopRatedMovies(sortBy : String) {
 
-        _viewState.value = HomeViewState.Loading
+        _viewState.value = Loading
         add(
             movieRepository.getTopRatedMovies(sortBy)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    _viewState.value = Presenting(it)
+                    _viewState.value = Presenting(removeBrokenMovies(it))
                 }, {
-                    RxJavaPlugins.onError(it)
-                    Log.d("TAG", "ERROR HOME VM")
-                    _viewState.value = Error
+                    onError(R.string.network_error)
                 }
                 )
         )
@@ -63,10 +60,14 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
         _navigateToSelectedMovie.value = null
     }
 
-    val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
+    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
 
-    protected fun add(disposable: Disposable) {
+    private fun add(disposable: Disposable) {
         compositeDisposable.add(disposable)
+    }
+
+    private fun onError(message: Int) {
+        _viewState.value = Error(message)
     }
 
     override fun onCleared() {

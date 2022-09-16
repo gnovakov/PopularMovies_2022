@@ -76,7 +76,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showMovies(movies: List<Movie>) {
 
-        adapter.submitList(removeBrokenMovies(movies))
+        adapter.submitList(movies)
     }
 
     private fun setupRecyclerView() {

@@ -5,9 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.gnova.domain.models.Movie
 import com.gnova.domain.repositories.MovieRepository
+import com.gnova.popularmovies_2022.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.gnova.popularmovies_2022.ui.detail.DetailViewState.*
+import com.gnova.popularmovies_2022.ui.home.HomeViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
@@ -47,16 +49,25 @@ class DetailViewModel @Inject constructor(private val movieRepository: MovieRepo
                 .subscribe({
                     _viewState.value = Presenting(it)
                 }, {
-                    _viewState.value = Error
+                    onError(R.string.network_error)
                 }
 
                 ))
     }
 
-    val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
+    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
 
-    protected fun add(disposable: Disposable) {
+    private fun add(disposable: Disposable) {
         compositeDisposable.add(disposable)
+    }
+
+    private fun onError(message: Int) {
+        _viewState.value = DetailViewState.Error(message)
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        compositeDisposable.clear()
     }
 
 }
