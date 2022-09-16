@@ -9,7 +9,6 @@ import com.gnova.popularmovies_2022.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.gnova.popularmovies_2022.ui.detail.DetailViewState.*
-import com.gnova.popularmovies_2022.ui.home.HomeViewState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers

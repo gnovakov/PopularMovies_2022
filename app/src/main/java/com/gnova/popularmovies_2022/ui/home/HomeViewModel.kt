@@ -7,6 +7,7 @@ import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
 import com.gnova.domain.repositories.MovieRepository
 import com.gnova.popularmovies_2022.R
+import com.gnova.popularmovies_2022.util.removeBrokenMovies
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

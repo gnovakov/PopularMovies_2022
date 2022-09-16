@@ -3,7 +3,6 @@ package com.gnova.popularmovies_2022.ui.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import androidx.core.net.toUri
@@ -85,7 +84,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
     }
 
     private fun showTrailers(trailers: List<Trailer>) {
-        Log.d("TAG", "showTrailers TRAILER " + trailers[0].name)
         trailerViewAdapter.submitList(trailers)
     }
 

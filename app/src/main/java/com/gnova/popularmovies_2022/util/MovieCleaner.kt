@@ -1,4 +1,4 @@
-package com.gnova.popularmovies_2022.ui.home
+package com.gnova.popularmovies_2022.util
 
 import com.gnova.domain.models.Movie
 
