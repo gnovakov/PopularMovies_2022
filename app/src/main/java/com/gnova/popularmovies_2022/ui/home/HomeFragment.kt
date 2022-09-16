@@ -53,6 +53,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                     Log.d("TAG", "ERROR HOME FRAGMENT")
                     binding.statusImage.visibility = View.VISIBLE
                     binding.statusImage.setImageResource(R.drawable.ic_connection_error)
+                    binding.networkErrorTv.visibility = View.VISIBLE
+                    binding.networkErrorTv.text = resources.getString(it.message)
                 }
                 is Presenting -> {
                     binding.statusImage.visibility = View.GONE

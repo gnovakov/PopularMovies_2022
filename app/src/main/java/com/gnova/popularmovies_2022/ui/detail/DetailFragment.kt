@@ -57,18 +57,16 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
         viewModel.viewState.observe(viewLifecycleOwner, Observer {
             when (it) {
                 is Loading -> {
-                    Log.d("TAG", "LOADING DF")
                     binding.statusImage.visibility = View.VISIBLE
                     binding.statusImage.setImageResource(R.drawable.loading_animation)
                 }
-
                 is Error -> {
-                    Log.d("TAG", "ERROR")
                     binding.statusImage.visibility = View.VISIBLE
                     binding.statusImage.setImageResource(R.drawable.ic_connection_error)
+                    binding.networkErrorTv.visibility = View.VISIBLE
+                    binding.networkErrorTv.text = resources.getString(it.message)
                 }
                 is Presenting -> {
-                    Log.d("TAG", "DONE DF")
                     observeSelectedMovie()
                     showTrailers(it.results)
                 }

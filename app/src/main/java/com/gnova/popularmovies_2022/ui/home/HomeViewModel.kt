@@ -45,8 +45,7 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
                     _viewState.value = Presenting(removeBrokenMovies(it))
                 }, {
                     onError(R.string.network_error)
-                }
-                )
+                })
         )
     }
 
@@ -60,14 +59,14 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
         _navigateToSelectedMovie.value = null
     }
 
+    private fun onError(message: Int) {
+        _viewState.value = Error(message)
+    }
+
     private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
 
     private fun add(disposable: Disposable) {
         compositeDisposable.add(disposable)
-    }
-
-    private fun onError(message: Int) {
-        _viewState.value = Error(message)
     }
 
     override fun onCleared() {

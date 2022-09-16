@@ -50,9 +50,12 @@ class DetailViewModel @Inject constructor(private val movieRepository: MovieRepo
                     _viewState.value = Presenting(it)
                 }, {
                     onError(R.string.network_error)
-                }
+                })
+        )
+    }
 
-                ))
+    private fun onError(message: Int) {
+        _viewState.value = Error(message)
     }
 
     private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
@@ -60,11 +63,6 @@ class DetailViewModel @Inject constructor(private val movieRepository: MovieRepo
     private fun add(disposable: Disposable) {
         compositeDisposable.add(disposable)
     }
-
-    private fun onError(message: Int) {
-        _viewState.value = DetailViewState.Error(message)
-    }
-
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.clear()
