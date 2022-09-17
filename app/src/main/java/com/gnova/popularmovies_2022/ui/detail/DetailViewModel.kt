@@ -9,18 +9,18 @@ import com.gnova.popularmovies_2022.R
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import com.gnova.popularmovies_2022.ui.detail.DetailViewState.*
+import com.gnova.popularmovies_2022.util.DisposingViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class DetailViewModel @Inject constructor(private val movieRepository: MovieRepository) : ViewModel() {
+class DetailViewModel @Inject constructor(private val movieRepository: MovieRepository) : DisposingViewModel() {
 
     fun onViewInit(movie: Movie) {
         _selectedMovie.value = movie
-        _movieId.value = movie.id
-        movieId.value?.let { getTrailers(it) }
+        getTrailers(movie.id)
     }
 
     // MutableLiveData that stores the selected movie
@@ -33,13 +33,7 @@ class DetailViewModel @Inject constructor(private val movieRepository: MovieRepo
     val viewState: LiveData<DetailViewState>
         get() = _viewState
 
-    // ID to get the Trailers and the Reviews.
-    private val _movieId = MutableLiveData<Int>()
-    val movieId: LiveData<Int>
-        get() = _movieId
-
-
-    private fun getTrailers(id: Int) {
+private fun getTrailers(id: Int) {
         _viewState.value = Loading
         add(
             movieRepository.getTrailers(id)
@@ -55,16 +49,6 @@ class DetailViewModel @Inject constructor(private val movieRepository: MovieRepo
 
     private fun onError(message: Int) {
         _viewState.value = Error(message)
-    }
-
-    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
-
-    private fun add(disposable: Disposable) {
-        compositeDisposable.add(disposable)
-    }
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
     }
 
 }

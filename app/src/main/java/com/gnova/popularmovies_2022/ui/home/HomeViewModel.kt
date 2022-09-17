@@ -7,16 +7,14 @@ import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
 import com.gnova.domain.repositories.MovieRepository
 import com.gnova.popularmovies_2022.R
-import com.gnova.popularmovies_2022.util.removeBrokenMovies
+import com.gnova.popularmovies_2022.util.DisposingViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository): ViewModel()  {
+class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository): DisposingViewModel()  {
 
 
     // View State
@@ -43,14 +41,14 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    _viewState.value = Presenting(removeBrokenMovies(it))
+                    _viewState.value = Presenting(it)
                 }, {
                     onError(R.string.network_error)
                 })
         )
     }
 
-    // sets _navigateToSelectedMovie to the selected Mars Movie, when this is set the switch to detail page will happen
+    // sets _navigateToSelectedMovie to the selected Movie, when this is set the switch to detail page will happen
     fun displayMovieDetails(movie: Movie) {
         _navigateToSelectedMovie.value = movie
     }
@@ -62,17 +60,6 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
 
     private fun onError(message: Int) {
         _viewState.value = Error(message)
-    }
-
-    private val compositeDisposable: CompositeDisposable by lazy { CompositeDisposable() }
-
-    private fun add(disposable: Disposable) {
-        compositeDisposable.add(disposable)
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
     }
 
 }

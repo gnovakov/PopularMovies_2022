@@ -12,6 +12,7 @@ import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.databinding.FragmentHomeBinding
 import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
+import com.gnova.popularmovies_2022.util.removeBrokenMovies
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -78,7 +79,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private fun showMovies(movies: List<Movie>) {
 
-        adapter.submitList(movies)
+        adapter.submitList(removeBrokenMovies(movies))
     }
 
     private fun setupRecyclerView() {
