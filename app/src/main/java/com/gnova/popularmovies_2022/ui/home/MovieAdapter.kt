@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.gnova.domain.models.Movie
-import com.gnova.popularmovies_2022.util.Const.BASE_IMAGE_LARGE
+import com.gnova.popularmovies_2022.common.Const.BASE_IMAGE_LARGE
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.databinding.MovieGridViewItemBinding
 import com.squareup.picasso.Picasso

@@ -1,7 +1,7 @@
 package com.gnova.popularmovies_2022.di
 
 import com.gnova.data.api.MovieApi
-import com.gnova.popularmovies_2022.util.Const.BASE_URL
+import com.gnova.popularmovies_2022.common.Const.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.gnova.popularmovies_2022.util
+package com.gnova.popularmovies_2022.common
 
 object Const {
 

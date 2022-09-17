@@ -36,7 +36,7 @@ class HomeViewModelTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         homeViewModel = HomeViewModel(movieRepository)
     }
 

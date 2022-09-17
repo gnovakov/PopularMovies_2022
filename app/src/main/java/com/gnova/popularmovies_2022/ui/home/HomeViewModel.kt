@@ -2,12 +2,11 @@ package com.gnova.popularmovies_2022.ui.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
 import com.gnova.domain.repositories.MovieRepository
 import com.gnova.popularmovies_2022.R
-import com.gnova.popularmovies_2022.util.DisposingViewModel
+import com.gnova.popularmovies_2022.common.DisposingViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -43,7 +42,7 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
                 .subscribe({
                     _viewState.value = Presenting(it)
                 }, {
-                    onError(R.string.network_error)
+                    _viewState.value = Error(R.string.network_error)
                 })
         )
     }
@@ -56,10 +55,6 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
     // sets _navigateToSelectedMovie back to null/resets it, this way when we return to overview page it doesn't automatically go back to the detail page
     fun displayMovieDetailsComplete() {
         _navigateToSelectedMovie.value = null
-    }
-
-    private fun onError(message: Int) {
-        _viewState.value = Error(message)
     }
 
 }

@@ -14,7 +14,6 @@ import org.junit.*
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-
 internal class DetailViewModelTest {
 
     @Rule
@@ -35,7 +34,7 @@ internal class DetailViewModelTest {
     @Before
     @Throws(Exception::class)
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         detailViewModel = DetailViewModel(movieRepository)
     }
 

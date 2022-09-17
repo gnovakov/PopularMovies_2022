@@ -12,8 +12,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.gnova.domain.models.Movie
 import com.gnova.domain.models.Trailer
-import com.gnova.popularmovies_2022.util.Const.BASE_IMAGE_LARGE
-import com.gnova.popularmovies_2022.util.Const.YOUTUBE_TRAILER_BASE_URL
+import com.gnova.popularmovies_2022.common.Const.BASE_IMAGE_LARGE
+import com.gnova.popularmovies_2022.common.Const.YOUTUBE_TRAILER_BASE_URL
 import com.gnova.popularmovies_2022.ui.detail.DetailViewState.*
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.databinding.FragmentDetailBinding
@@ -115,7 +115,6 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
             val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
             Picasso.get()
                 .load(imgUri)
-                //.placeholder(R.drawable.loading_animation)
                 .error(R.drawable.ic_broken_image)
                 .into(imageView)
         }

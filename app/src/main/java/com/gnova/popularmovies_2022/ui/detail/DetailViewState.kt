@@ -2,7 +2,6 @@ package com.gnova.popularmovies_2022.ui.detail
 
 import androidx.annotation.StringRes
 import com.gnova.domain.models.Trailer
-import com.gnova.popularmovies_2022.ui.home.HomeViewState
 
 sealed class DetailViewState {
 

@@ -2,16 +2,13 @@ package com.gnova.popularmovies_2022.ui.detail
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.gnova.domain.models.Movie
 import com.gnova.domain.repositories.MovieRepository
 import com.gnova.popularmovies_2022.R
 import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
 import com.gnova.popularmovies_2022.ui.detail.DetailViewState.*
-import com.gnova.popularmovies_2022.util.DisposingViewModel
+import com.gnova.popularmovies_2022.common.DisposingViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
@@ -42,13 +39,9 @@ private fun getTrailers(id: Int) {
                 .subscribe({
                     _viewState.value = Presenting(it)
                 }, {
-                    onError(R.string.network_error)
+                    _viewState.value = Error(R.string.network_error)
                 })
         )
-    }
-
-    private fun onError(message: Int) {
-        _viewState.value = Error(message)
     }
 
 }
