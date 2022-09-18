@@ -38,7 +38,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     //MockK
-    //testImplementation 'io.mockk:mockk:1.12.5'
+    testImplementation 'io.mockk:mockk:1.12.5'
 
     implementation project(':domain')
 }

@@ -131,7 +131,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     //MockK
-    //testImplementation 'io.mockk:mockk:1.12.5'
+    testImplementation 'io.mockk:mockk:1.12.5'
 
     implementation project(':data')
     implementation project(':domain')
