@@ -2,12 +2,8 @@ package com.gnova.popularmovies_2022.common
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.gnova.domain.models.Movie
-import com.gnova.domain.repositories.MovieRepository
-import com.gnova.popularmovies_2022.ui.RxImmediateSchedulerRule
-import com.gnova.popularmovies_2022.ui.home.HomeViewModel
 import junit.framework.Assert.assertEquals
 import org.junit.*
-import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 internal class MovieCleanerKtTest {
@@ -15,12 +11,6 @@ internal class MovieCleanerKtTest {
     @Rule
     @JvmField
     val rule = InstantTaskExecutorRule()
-
-    companion object {
-        @ClassRule
-        @JvmField
-        val schedulers = RxImmediateSchedulerRule()
-    }
 
     private lateinit var movieCleaner: MovieCleaner
 
@@ -32,30 +22,30 @@ internal class MovieCleanerKtTest {
     }
 
     @Test
-    fun `GIVEN getTopRatedMovies returns list of Movies WHEN onViewLoaded THEN viewState is Presenting`() {
+    fun `GIVEN a list of movies WHEN title, overview, poster_path is null THEN return clean movies`() {
        //WHEN
-        val result = movieCleaner.removeBrokenMovies(mockCleanListEven)
+        val result = movieCleaner.removeBrokenMovies(moviesEven)
 
         //THEN
         assertEquals(
-            mockCleanListEven.dropLast(3),
+            moviesEven.dropLast(3),
             result
         )
     }
 
-//    @Test
-//    fun `GIVEN getTopRatedMovies returns list of Movies WHEN onViewLoaded THEN viewState is Presenting2`() {
-//        //WHEN
-//        val result = movieCleaner.removeBrokenMovies(mockCleanListOdd)
-//
-//        //THEN
-//        assertEquals(
-//            mockCleanListEven.dropLast(3),
-//            result
-//        )
-//    }
+    @Test
+    fun `GIVEN a list of movies WHEN title, overview, poster_path is null THEN return even number of clean movies `() {
+        //WHEN
+        val result = movieCleaner.removeBrokenMovies(moviesOdd)
 
-    val mockCleanListEven = listOf<Movie>(
+        //THEN
+        assertEquals(
+            moviesOdd.dropLast(4),
+            result
+        )
+    }
+
+    private val moviesEven = listOf<Movie>(
         Movie(
             id = 1,
             vote_average = 2.2,
@@ -103,7 +93,7 @@ internal class MovieCleanerKtTest {
         )
     )
 
-    val mockCleanListOdd = listOf<Movie>(
+    private val moviesOdd = listOf<Movie>(
         Movie(
             id = 1,
             vote_average = 2.2,

@@ -42,10 +42,7 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    val clean = movieCleaner.removeBrokenMovies(it)
-
-                    _viewState.value = Presenting(clean)
-
+                    _viewState.value = Presenting(movieCleaner.removeBrokenMovies(it))
                 }, {
                     _viewState.value = Error(R.string.network_error)
                 })

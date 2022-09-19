@@ -7,7 +7,6 @@ import com.gnova.domain.repositories.MovieRepository
 import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.common.MovieCleaner
-import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Before
 import org.junit.Rule
@@ -47,13 +46,16 @@ class HomeViewModelTest {
     @Test
     fun `GIVEN getTopRatedMovies returns list of Movies WHEN onViewLoaded THEN viewState is Presenting`() {
         //GIVEN
-        whenever(movieRepository.getTopRatedMovies("popularity.desc")).thenReturn(Single.just(mockCleanList))
+        val cleanedMovies = movies.dropLast(3)
+
+        whenever(movieRepository.getTopRatedMovies("popularity.desc")).thenReturn(Single.just(movies))
+        whenever(movieCleaner.removeBrokenMovies(movies)).thenReturn(cleanedMovies)
 
         //WHEN
         homeViewModel.onViewLoaded()
 
         //THEN
-        assertEquals(HomeViewState.Presenting(mockCleanList.dropLast(3)), homeViewModel.viewState.value)
+        assertEquals(HomeViewState.Presenting(cleanedMovies), homeViewModel.viewState.value)
     }
 
     @Test
@@ -68,7 +70,7 @@ class HomeViewModelTest {
         assertEquals(HomeViewState.Error(R.string.network_error), homeViewModel.viewState.value)
     }
 
-    val mockCleanList = listOf<Movie>(
+    private val movies = listOf<Movie>(
         Movie(
             id = 1,
             vote_average = 2.2,

@@ -12,7 +12,6 @@ import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.databinding.FragmentHomeBinding
 import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
-import com.gnova.popularmovies_2022.common.removeBrokenMovies
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
