@@ -6,8 +6,6 @@ import com.gnova.popularmovies_2022.ui.RxImmediateSchedulerRule
 import com.gnova.domain.repositories.MovieRepository
 import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.R
-import com.gnova.popularmovies_2022.common.MovieCleaner
-import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Before
 import org.junit.Rule
@@ -34,14 +32,11 @@ class HomeViewModelTest {
     @Mock
     lateinit var movieRepository: MovieRepository
 
-    @Mock
-    lateinit var movieCleaner: MovieCleaner
-
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        homeViewModel = HomeViewModel(movieRepository, movieCleaner)
+        homeViewModel = HomeViewModel(movieRepository)
     }
 
     @Test
