@@ -6,6 +6,7 @@ import com.gnova.popularmovies_2022.ui.RxImmediateSchedulerRule
 import com.gnova.domain.repositories.MovieRepository
 import com.gnova.domain.models.Movie
 import com.gnova.popularmovies_2022.R
+import com.gnova.popularmovies_2022.common.MovieCleaner
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
 import org.junit.Before
@@ -33,24 +34,26 @@ class HomeViewModelTest {
     @Mock
     lateinit var movieRepository: MovieRepository
 
+    @Mock
+    lateinit var movieCleaner: MovieCleaner
+
     @Before
     @Throws(Exception::class)
     fun setUp() {
         MockitoAnnotations.openMocks(this)
-        homeViewModel = HomeViewModel(movieRepository)
+        homeViewModel = HomeViewModel(movieRepository, movieCleaner)
     }
 
     @Test
     fun `GIVEN getTopRatedMovies returns list of Movies WHEN onViewLoaded THEN viewState is Presenting`() {
         //GIVEN
-        val mockMovies = mock<List<Movie>>()
-        whenever(movieRepository.getTopRatedMovies("popularity.desc")).thenReturn(Single.just(mockMovies))
+        whenever(movieRepository.getTopRatedMovies("popularity.desc")).thenReturn(Single.just(mockCleanList))
 
         //WHEN
         homeViewModel.onViewLoaded()
 
         //THEN
-        assertEquals(HomeViewState.Presenting(mockMovies), homeViewModel.viewState.value)
+        assertEquals(HomeViewState.Presenting(mockCleanList.dropLast(3)), homeViewModel.viewState.value)
     }
 
     @Test
@@ -64,5 +67,53 @@ class HomeViewModelTest {
         //THEN
         assertEquals(HomeViewState.Error(R.string.network_error), homeViewModel.viewState.value)
     }
+
+    val mockCleanList = listOf<Movie>(
+        Movie(
+            id = 1,
+            vote_average = 2.2,
+            title = "movie",
+            release_date = "01/01/2050",
+            backdrop_path = "path",
+            overview = "movie",
+            poster_path = "path"
+        ),
+        Movie(
+            id = 2,
+            vote_average = 2.2,
+            title = "movie",
+            release_date = "01/01/2050",
+            backdrop_path = "path",
+            overview = "movie",
+            poster_path = "path"
+        ),
+        Movie(
+            id = 2,
+            vote_average = 2.2,
+            title = "movie",
+            release_date = "01/01/2050",
+            backdrop_path = "path",
+            overview = "movie",
+            poster_path = ""
+        ),
+        Movie(
+            id = 2,
+            vote_average = 2.2,
+            title = "",
+            release_date = "01/01/2050",
+            backdrop_path = "path",
+            overview = "movie",
+            poster_path = "path"
+        ),
+        Movie(
+            id = 2,
+            vote_average = 2.2,
+            title = "movie",
+            release_date = "01/01/2050",
+            backdrop_path = "path",
+            overview = "",
+            poster_path = "path"
+        )
+    )
 
 }

@@ -1,23 +1,23 @@
 package com.gnova.popularmovies_2022.common
 
+import android.util.Log
 import com.gnova.domain.models.Movie
+import javax.inject.Inject
 
-fun removeBrokenMovies(movies: List<Movie>): MutableList<Movie> {
+class MovieCleaner @Inject constructor() {
 
-    val cleanedMovies: MutableList<Movie> = mutableListOf()
+    fun removeBrokenMovies(movies: List<Movie>): List<Movie> {
 
-    movies.forEach {
-        if (it.id != null &&
-            it.vote_average != null &&
-            it.title != null &&
-            it.release_date != null &&
-            it.backdrop_path != null &&
-            it.overview != null &&
-            it.poster_path != null
-        ) {
-            cleanedMovies.add(it)
+        return movies.filterNot {
+            it.title == "" ||
+            it.poster_path == "" ||
+            it.overview == ""
         }
+
+//        return if (cleanedMovies.size % 2 == 0)
+//            cleanedMovies
+//        else
+//            cleanedMovies.dropLast(1)
     }
 
-    return cleanedMovies.dropLast(20 - cleanedMovies.size) as MutableList<Movie>
 }

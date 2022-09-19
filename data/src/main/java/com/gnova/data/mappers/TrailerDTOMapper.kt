@@ -1,13 +1,22 @@
 package com.gnova.data.mappers
 
 import com.gnova.data.models.TrailerDTO
-import com.gnova.domain.mappers.DomainMapper
 import com.gnova.domain.models.Trailer
 import javax.inject.Inject
 
-class TrailerDTOMapper @Inject constructor() : DomainMapper<TrailerDTO, Trailer> {
+class TrailerDTOMapper @Inject constructor() {
 
-    override fun mapToDomain(entity: TrailerDTO): Trailer {
+    fun mapToDomainList(entityDTOs: List<TrailerDTO>): List<Trailer> {
+        return entityDTOs.map {
+            mapToDomain(it) }
+    }
+
+    fun mapToEntityList(domainModels: List<Trailer>): List<TrailerDTO> {
+        return domainModels.map {
+            mapToEntity(it) }
+    }
+
+    private fun mapToDomain(entity: TrailerDTO): Trailer {
         return Trailer(
             id = entity.id,
             key = entity.key,
@@ -15,21 +24,11 @@ class TrailerDTOMapper @Inject constructor() : DomainMapper<TrailerDTO, Trailer>
         )
     }
 
-    override fun mapToEntity(domainModel: Trailer): TrailerDTO {
+    private fun mapToEntity(domainModel: Trailer): TrailerDTO {
         return TrailerDTO(
             id = domainModel.id,
             key = domainModel.key,
             name = domainModel.name
         )
-    }
-
-    fun mapToDomainList(trailerDTOs: List<TrailerDTO>): List<Trailer> {
-        return trailerDTOs.map {
-            mapToDomain(it) }
-    }
-
-    fun mapToEntityList(trailers: List<Trailer>): List<TrailerDTO> {
-        return trailers.map {
-            mapToEntity(it) }
     }
 }

@@ -1,13 +1,22 @@
 package com.gnova.data.mappers
 
 import com.gnova.data.models.MovieDTO
-import com.gnova.domain.mappers.DomainMapper
 import com.gnova.domain.models.Movie
 import javax.inject.Inject
 
-class MovieDTOMapper @Inject constructor() : DomainMapper<MovieDTO, Movie> {
+class MovieDTOMapper @Inject constructor() {
 
-    override fun mapToDomain(entity: MovieDTO): Movie {
+    fun mapToDomainList(entityDTOs: List<MovieDTO>): List<Movie> {
+        return entityDTOs.map {
+            mapToDomain(it) }
+    }
+
+    fun mapToEntityList(domainModels: List<Movie>): List<MovieDTO> {
+        return domainModels.map {
+            mapToEntity(it) }
+    }
+
+    private fun mapToDomain(entity: MovieDTO): Movie {
         return Movie(
             id = entity.id,
             vote_average = entity.vote_average,
@@ -19,7 +28,7 @@ class MovieDTOMapper @Inject constructor() : DomainMapper<MovieDTO, Movie> {
         )
     }
 
-    override fun mapToEntity(domainModel: Movie): MovieDTO {
+    private fun mapToEntity(domainModel: Movie): MovieDTO {
         return MovieDTO(
             id = domainModel.id,
             vote_average = domainModel.vote_average,
@@ -29,15 +38,5 @@ class MovieDTOMapper @Inject constructor() : DomainMapper<MovieDTO, Movie> {
             overview = domainModel.overview,
             poster_path = domainModel.poster_path
         )
-    }
-
-    fun mapToDomainList(movieDTOs: List<MovieDTO>): List<Movie> {
-        return movieDTOs.map {
-            mapToDomain(it) }
-    }
-
-    fun mapToEntityList(movies: List<Movie>): List<MovieDTO> {
-        return movies.map {
-            mapToEntity(it) }
     }
 }

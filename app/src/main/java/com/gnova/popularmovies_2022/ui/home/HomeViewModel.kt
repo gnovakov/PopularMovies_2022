@@ -7,13 +7,15 @@ import com.gnova.popularmovies_2022.ui.home.HomeViewState.*
 import com.gnova.domain.repositories.MovieRepository
 import com.gnova.popularmovies_2022.R
 import com.gnova.popularmovies_2022.common.DisposingViewModel
+import com.gnova.popularmovies_2022.common.MovieCleaner
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository): DisposingViewModel()  {
+class HomeViewModel @Inject constructor(private val movieRepository: MovieRepository,
+                                        private val movieCleaner: MovieCleaner): DisposingViewModel()  {
 
 
     // View State
@@ -40,7 +42,10 @@ class HomeViewModel @Inject constructor(private val movieRepository: MovieReposi
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    _viewState.value = Presenting(it)
+                    val clean = movieCleaner.removeBrokenMovies(it)
+
+                    _viewState.value = Presenting(clean)
+
                 }, {
                     _viewState.value = Error(R.string.network_error)
                 })
